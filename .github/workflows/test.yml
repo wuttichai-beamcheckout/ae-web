@@ -33,4 +33,4 @@ jobs:
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           workflow_file_name: dispatch.yml
           ref: master
-          client_payload: '{"url":"URL_TRSSS","env":"ENV12","tag":"TAGk"}'
+          client_payload: '{\"url\":\"URL_TRSSS\",\"env\":\"ENV12\",\"tag\":\"TAGk\"}'
