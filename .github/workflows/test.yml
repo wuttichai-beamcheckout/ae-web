@@ -31,5 +31,5 @@ jobs:
           owner: wuttichai-beamcheckout
           repo: ae-test
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          workflow_file_name: test.yml
+          workflow_file_name: dispatch.yml
           ref: master
