@@ -33,3 +33,4 @@ jobs:
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           workflow_file_name: dispatch.yml
           ref: master
+          client_payload: '{ url: "URL_TEST", tag: "TAG", env: "ENVJA"}'
