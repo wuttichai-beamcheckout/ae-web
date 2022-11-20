@@ -16,9 +16,15 @@ jobs:
       - name: cache
         id: yarn-cache
         uses: actions/cache@v3
+        env:
+          cache-name: cache-node_modules
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
       - name: Install Dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true'
@@ -37,6 +43,10 @@ jobs:
         with:
           node-version: '16'
           cache: 'yarn'
+
+      - name: Install Dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
 
       - name: Run lint
         run: yarn run lint
