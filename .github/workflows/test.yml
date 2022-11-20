@@ -36,11 +36,19 @@ jobs:
       - name: Run lint
         run: yarn run lint
 
-      # - uses: convictional/trigger-workflow-and-wait@v1.6.1
-      #   with:
-      #     owner: wuttichai-beamcheckout
-      #     repo: ae-test
-      #     github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-      #     workflow_file_name: dispatch.yml
-      #     ref: master
-      #     client_payload: '{"url":"hello"}'
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'yarn'
+
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run test
+        run: yarn run test
